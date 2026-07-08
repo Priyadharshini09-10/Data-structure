@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
+struct Node *top=NULL;
+
+void push(int data){
+    struct Node *newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=data;
+    newNode->next=top;
+    top=newNode;
+}
+
+void pop(){
+    struct Node *temp=top;
+    if(top==NULL){
+        printf("Underflow");
+    }
+    else{
+        printf("Deleted ele:%d\n",top->data);
+        top=top->next;
+        free(temp);
+    }
+}
+
+void peek(){
+    if(top==NULL){
+        printf("Stack empty");
+    }
+    printf("Top ele:%d\n",top->data);
+}
+
+void display(){
+    struct Node *temp=top;
+    if(top==NULL){
+        printf("Stack empty");
+    }
+    while(temp!=NULL){
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+}
+int main()
+{
+    push(10);
+    push(20);
+    push(30);
+    push(40);
+    printf("Stack ele:");
+    display();
+    peek();
+    pop();
+    printf("After pop:");
+    display();
+    peek();
+
+    return 0;
+}
